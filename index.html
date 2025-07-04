@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Login Seguro (o eso parece...)</title>
+  <title>Simulación de Ataque XSS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -29,19 +29,20 @@
 </head>
 <body>
 
-  <h1>Iniciar Sesión</h1>
-  <p>Simulación de sitio vulnerable a XSS y robo de datos</p>
+  <h1>Login Simulado (Inseguro)</h1>
+  <p>Solo para pruebas de seguridad (XSS reflejado)</p>
 
+  <!-- Formulario de "login" (inseguro) -->
   <input type="text" id="usuario" placeholder="Usuario"><br>
   <input type="password" id="clave" placeholder="Contraseña"><br>
   <button onclick="iniciarSesion()">Entrar</button>
-
   <p id="estado"></p>
 
   <hr>
 
-  <h2>Comentarios</h2>
-  <p>Deja tu mensaje (sin censura 😈):</p>
+  <h2>Comentarios públicos</h2>
+  <p>¡Cuidado! Esta sección no filtra nada...</p>
+
   <input type="text" id="comentario" placeholder="Escribe algo aquí">
   <button onclick="publicar()">Publicar</button>
 
@@ -49,10 +50,10 @@
 
   <script>
     function iniciarSesion() {
-      let usuario = document.getElementById('usuario').value;
-      let clave = document.getElementById('clave').value;
+      const usuario = document.getElementById('usuario').value;
+      const clave = document.getElementById('clave').value;
 
-      // Guardar en cookies simuladas (sin seguridad)
+      // Guardar en cookies inseguras (solo simulación)
       document.cookie = "usuario=" + usuario;
       document.cookie = "clave=" + clave;
 
@@ -60,7 +61,9 @@
     }
 
     function publicar() {
-      let msj = document.getElementById('comentario').value;
+      const msj = document.getElementById('comentario').value;
+
+      // VULNERABILIDAD: inserta sin escapar, permitiendo XSS
       document.getElementById('mensaje').innerHTML = msj;
     }
   </script>
